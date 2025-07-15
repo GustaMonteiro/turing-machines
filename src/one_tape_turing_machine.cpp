@@ -20,10 +20,7 @@ bool One_Tape_Turing_Machine::test_string(const std::string &input)
 
 void One_Tape_Turing_Machine::prepare_tape(const std::string &input)
 {
-    cursor = 0;
-    tape.clear();
-    tape.insert(tape.begin(), input.begin(), input.end());
-    tape.resize(input.size() + NUMBER_OF_BLANKS_AFTER, BLANK);
+    tape.prepare(input);
 }
 
 void One_Tape_Turing_Machine::searching_loop()
@@ -121,32 +118,32 @@ void One_Tape_Turing_Machine::go_back()
     go_right();
 }
 
-inline char One_Tape_Turing_Machine::current() const
+char One_Tape_Turing_Machine::current() const
 {
-    return tape[cursor];
+    return tape.current();
 }
 
 void One_Tape_Turing_Machine::mark_x()
 {
-    tape[cursor] = X;
+    tape.write(X);
 }
 
 void One_Tape_Turing_Machine::mark_y()
 {
-    tape[cursor] = Y;
+    tape.write(Y);
 }
 
 void One_Tape_Turing_Machine::mark_z()
 {
-    tape[cursor] = Z;
+    tape.write(Z);
 }
 
 void One_Tape_Turing_Machine::go_left()
 {
-    cursor--;
+    tape.go_left();
 }
 
 void One_Tape_Turing_Machine::go_right()
 {
-    cursor++;
+    tape.go_right();
 }

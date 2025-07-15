@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "turing_machine.h"
+#include "tape.h"
 
 class One_Tape_Turing_Machine : public Turing_Machine
 {
@@ -15,7 +16,7 @@ private:
     void search_for_one();
     void search_for_two();
     void look_for_remaining_numbers();
-    inline char current() const;
+    char current() const;
 
     void mark_x();
     void mark_y();
@@ -25,6 +26,5 @@ private:
     void go_back();
 
 private:
-    std::vector<char> tape;
-    size_t cursor = 0;
+    Tape tape;
 };
