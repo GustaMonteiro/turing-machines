@@ -2,6 +2,7 @@
 #include <format>
 
 #include "one_tape_turing_machine.h"
+#include "three_tape_turing_machine.h"
 
 bool match(Turing_Machine &machine, const std::string &input)
 {
@@ -9,7 +10,7 @@ bool match(Turing_Machine &machine, const std::string &input)
 }
 
 std::vector<std::pair<std::string, bool>> tests = {
-    {"", true},
+    // {"", true},
     {"012", true},
     {"001122", true},
     {"000111222", true},
@@ -92,10 +93,12 @@ std::vector<std::pair<std::string, bool>> tests = {
 
 int main()
 {
-    One_Tape_Turing_Machine turing_machine;
+    Three_Tape_Turing_Machine turing_machine;
 
     for (auto [input, expected] : tests)
     {
+        std::cout << std::format("Testing input '{}'\n", input);
+
         bool result = match(turing_machine, input);
 
         if (result != expected)

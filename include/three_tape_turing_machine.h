@@ -15,7 +15,7 @@ private:
 
     void write_numbers_on_other_tapes();
     void go_back_all_tapes();
-    void verify_if_tapes_are_the_same_size();
+    bool verify_if_tapes_are_the_same_size();
 
 private:
     Tape tape_1, tape_2, tape_3;
