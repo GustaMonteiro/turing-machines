@@ -4,10 +4,24 @@
 
 bool Three_Tape_Turing_Machine::test_string(const std::string &input)
 {
-    prepare_tapes(input);
-    write_numbers_on_other_tapes();
-    go_back_all_tapes();
-    return verify_if_tapes_are_the_same_size();
+    try
+    {
+        prepare_tapes(input);
+        write_numbers_on_other_tapes();
+        go_back_all_tapes();
+        verify_if_tapes_are_the_same_size();
+    }
+    catch (bool result)
+    {
+        return result;
+    }
+
+    return REJECT;
+}
+
+std::string Three_Tape_Turing_Machine::get_name() const
+{
+    return "Three Tape Turing Machine";
 }
 
 void Three_Tape_Turing_Machine::prepare_tapes(const std::string &input)
@@ -19,59 +33,56 @@ void Three_Tape_Turing_Machine::prepare_tapes(const std::string &input)
 
 void Three_Tape_Turing_Machine::write_numbers_on_other_tapes()
 {
-    while (tape_1.current() != BLANK)
+    if (tape_1.current() == BLANK)
+        throw ACCEPT;
+
+    while (true)
     {
-        if(tape_1.current() == ZERO)
-            tape_1.go_right();
-        else if (tape_1.current() == ONE)
+        if (tape_1.current() == ZERO)
         {
-            tape_2.write(ONE);
+            tape_2.write(ZERO);
             tape_2.go_right();
 
             tape_1.write(BLANK);
             tape_1.go_right();
         }
-        else if (tape_1.current() == TWO)
+        else if (tape_1.current() == ONE)
         {
-            tape_3.write(TWO);
+            tape_3.write(ONE);
             tape_3.go_right();
 
             tape_1.write(BLANK);
             tape_1.go_right();
         }
+        else if (tape_1.current() == TWO)
+            return;
+        else
+            throw REJECT;
     }
 }
 
 void Three_Tape_Turing_Machine::go_back_all_tapes()
 {
-    while (tape_1.current() != ZERO)
-        tape_1.go_left();
-
-    while (tape_2.current() != ONE)
-        tape_2.go_left();
-
-    while (tape_3.current() != TWO)
-        tape_3.go_left();
+    tape_2.go_left();
+    tape_3.go_left();
 }
 
-bool Three_Tape_Turing_Machine::verify_if_tapes_are_the_same_size()
+void Three_Tape_Turing_Machine::verify_if_tapes_are_the_same_size()
 {
     while (true)
     {
-        if (tape_1.current() == ZERO && tape_2.current() == ONE && tape_3.current() == TWO)
+        if (tape_1.current() == TWO && tape_2.current() == ZERO && tape_3.current() == ONE)
         {
-            tape_1.write(X);
-            tape_1.go_left();
-            tape_2.write(Y);
+            tape_1.write(Z);
+            tape_1.go_right();
+            tape_2.write(X);
             tape_2.go_left();
-            tape_3.write(Z);
+            tape_3.write(Y);
             tape_3.go_left();
         }
-        else if (tape_1.current() == X && tape_2.current() == Y && tape_3.current() == Z)
-            return ACCEPT;
+        else if (tape_1.current() == BLANK && tape_2.current() == X && tape_3.current() == Y)
+            throw ACCEPT;
         else
-            return REJECT;
+            throw REJECT;
     }
-
-    return REJECT;
 }

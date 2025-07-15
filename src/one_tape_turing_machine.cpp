@@ -18,6 +18,11 @@ bool One_Tape_Turing_Machine::test_string(const std::string &input)
     return REJECT;
 }
 
+std::string One_Tape_Turing_Machine::get_name() const
+{
+    return "One Tape Turing Machine";
+}
+
 void One_Tape_Turing_Machine::prepare_tape(const std::string &input)
 {
     tape.prepare(input);

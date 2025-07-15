@@ -1,6 +1,7 @@
 #include <iostream>
 #include <format>
 
+#include "turing_machine.h"
 #include "one_tape_turing_machine.h"
 #include "three_tape_turing_machine.h"
 
@@ -10,7 +11,7 @@ bool match(Turing_Machine &machine, const std::string &input)
 }
 
 std::vector<std::pair<std::string, bool>> tests = {
-    // {"", true},
+    {"", true},
     {"012", true},
     {"001122", true},
     {"000111222", true},
@@ -93,17 +94,27 @@ std::vector<std::pair<std::string, bool>> tests = {
 
 int main()
 {
-    Three_Tape_Turing_Machine turing_machine;
+    One_Tape_Turing_Machine one_tape;
+    Three_Tape_Turing_Machine three_tape;
 
-    for (auto [input, expected] : tests)
+    std::vector<Turing_Machine *> machines{&one_tape, &three_tape};
+
+    for (auto &machine : machines)
     {
-        std::cout << std::format("Testing input '{}'\n", input);
+        std::cout << "====================================================\n";
+        std::cout << machine->get_name() << '\n';
+        std::cout << "====================================================\n\n";
 
-        bool result = match(turing_machine, input);
+        for (auto [input, expected] : tests)
+        {
+            std::cout << std::format("Testing input '{}'\n", input);
 
-        if (result != expected)
-            std::cout << "[DIFFERENT] ";
+            bool result = match(*machine, input);
 
-        std::cout << std::format("Input: '{}', expected: {}, got: {}\n\n", input, expected, result);
+            if (result != expected)
+                std::cout << "[DIFFERENT] ";
+
+            std::cout << std::format("Input: '{}', expected: {}, got: {}\n\n", input, expected, result);
+        }
     }
 }

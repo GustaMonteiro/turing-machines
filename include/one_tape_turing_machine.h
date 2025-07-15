@@ -9,6 +9,7 @@ class One_Tape_Turing_Machine : public Turing_Machine
 {
 public:
     bool test_string(const std::string &input);
+    std::string get_name() const;
 
 private:
     void prepare_tape(const std::string &input);
