@@ -113,7 +113,7 @@ void execute_all_tests()
             if (result != expected)
                 std::cout << "[DIFFERENT] ";
 
-            std::cout << std::format("Input: '{}', expected: {}, got: {}\n\n", input, expected, result);
+            std::cout << std::format("Input: '{}', expected: {}, got: {}, steps: {}\n\n", input, expected, result, machine->last_run_steps());
         }
     }
 }
