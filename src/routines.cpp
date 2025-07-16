@@ -122,3 +122,22 @@ void execute_all_tests()
         }
     }
 }
+
+void execute_machines_with_input(const std::string &string)
+{
+    One_Tape_Turing_Machine one_tape;
+    Three_Tape_Turing_Machine three_tape;
+
+    std::vector<Turing_Machine *> machines{&one_tape, &three_tape};
+
+    for (auto &machine: machines)
+    {
+        std::cout << "====================================================\n";
+        std::cout << machine->get_name() << '\n';
+        std::cout << "====================================================\n\n";
+
+        bool result = match(*machine, string);
+        std::cout << "Result: " << (result ? "ACCEPT" : "REJECT") << '\n';
+        std::cout << std::format("Number of steps: {}\n\n", machine->last_run_steps());
+    }
+}
