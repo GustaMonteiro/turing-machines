@@ -9,7 +9,7 @@
 #include "three_tape_turing_machine.h"
 
 
-std::vector<std::pair<std::string, bool>> tests = {
+std::vector<std::pair<std::string, bool> > tests = {
     {"", true},
     {"012", true},
     {"001122", true},
@@ -103,13 +103,13 @@ void execute_all_tests()
 
     std::vector<Turing_Machine *> machines{&one_tape, &three_tape};
 
-    for (auto &machine : machines)
+    for (auto &machine: machines)
     {
         std::cout << "====================================================\n";
         std::cout << machine->get_name() << '\n';
         std::cout << "====================================================\n\n";
 
-        for (auto [input, expected] : tests)
+        for (auto [input, expected]: tests)
         {
             std::cout << std::format("Testing input '{}'\n", input);
 
