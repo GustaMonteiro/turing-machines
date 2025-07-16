@@ -91,11 +91,6 @@ std::vector<std::pair<std::string, bool> > tests = {
     {"0000", false},
 };
 
-bool match(Turing_Machine &machine, const std::string &input)
-{
-    return machine.test_string(input);
-}
-
 void execute_all_tests()
 {
     One_Tape_Turing_Machine one_tape;
@@ -113,7 +108,7 @@ void execute_all_tests()
         {
             std::cout << std::format("Testing input '{}'\n", input);
 
-            bool result = match(*machine, input);
+            bool result = machine->test_string(input);
 
             if (result != expected)
                 std::cout << "[DIFFERENT] ";
@@ -123,7 +118,7 @@ void execute_all_tests()
     }
 }
 
-void execute_machines_with_input(const std::string &string)
+void execute_machines_with_input(const std::string &input_string)
 {
     One_Tape_Turing_Machine one_tape;
     Three_Tape_Turing_Machine three_tape;
@@ -136,7 +131,7 @@ void execute_machines_with_input(const std::string &string)
         std::cout << machine->get_name() << '\n';
         std::cout << "====================================================\n\n";
 
-        bool result = match(*machine, string);
+        bool result = machine->test_string(input_string);
         std::cout << "Result: " << (result ? "ACCEPT" : "REJECT") << '\n';
         std::cout << std::format("Number of steps: {}\n\n", machine->last_run_steps());
     }
