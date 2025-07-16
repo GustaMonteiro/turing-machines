@@ -25,6 +25,7 @@ std::string One_Tape_Turing_Machine::get_name() const
 
 void One_Tape_Turing_Machine::prepare_tape(const std::string &input)
 {
+    steps_counter = 0;
     tape.prepare(input);
 }
 
@@ -130,25 +131,30 @@ char One_Tape_Turing_Machine::current() const
 
 void One_Tape_Turing_Machine::mark_x()
 {
+    steps_counter++;
     tape.write(X);
 }
 
 void One_Tape_Turing_Machine::mark_y()
 {
+    steps_counter++;
     tape.write(Y);
 }
 
 void One_Tape_Turing_Machine::mark_z()
 {
+    steps_counter++;
     tape.write(Z);
 }
 
 void One_Tape_Turing_Machine::go_left()
 {
+    steps_counter++;
     tape.go_left();
 }
 
 void One_Tape_Turing_Machine::go_right()
 {
+    steps_counter++;
     tape.go_right();
 }
