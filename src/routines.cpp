@@ -131,7 +131,10 @@ void execute_machines_with_input(const std::string &input_string)
         std::cout << machine->get_name() << '\n';
         std::cout << "====================================================\n\n";
 
+        std::cout << std::format("Testing input '{}'\n", input_string);
+
         bool result = machine->test_string(input_string);
+
         std::cout << "Result: " << (result ? "ACCEPT" : "REJECT") << '\n';
         std::cout << std::format("Number of steps: {}\n\n", machine->last_run_steps());
     }
