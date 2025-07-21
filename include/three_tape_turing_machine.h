@@ -15,6 +15,8 @@ private:
     void prepare_tapes(const std::string &input);
 
     void write_numbers_on_other_tapes();
+    void write_zeroes_on_tape_2();
+    void write_ones_on_tape_3();
     void go_back_all_tapes();
     void verify_if_tapes_are_the_same_size();
 

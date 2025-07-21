@@ -37,33 +37,42 @@ void Three_Tape_Turing_Machine::write_numbers_on_other_tapes()
     if (tape_1.current() == BLANK)
         throw ACCEPT;
 
-    while (true)
+    write_zeroes_on_tape_2();
+    write_ones_on_tape_3();
+}
+
+void Three_Tape_Turing_Machine::write_zeroes_on_tape_2()
+{
+    while (tape_1.current() == ZERO)
     {
-        if (tape_1.current() == ZERO)
-        {
-            tape_2.write(ZERO);
-            tape_2.go_right();
+        tape_2.write(ZERO);
+        tape_2.go_right();
 
-            tape_1.write(BLANK);
-            tape_1.go_right();
+        tape_1.write(BLANK);
+        tape_1.go_right();
 
-            steps_counter+=4;
-        }
-        else if (tape_1.current() == ONE)
-        {
-            tape_3.write(ONE);
-            tape_3.go_right();
-
-            tape_1.write(BLANK);
-            tape_1.go_right();
-
-            steps_counter+=4;
-        }
-        else if (tape_1.current() == TWO)
-            return;
-        else
-            throw REJECT;
+        steps_counter+=4;
     }
+
+    if(tape_1.current() != ONE)
+        throw REJECT;
+}
+
+void Three_Tape_Turing_Machine::write_ones_on_tape_3()
+{
+    while (tape_1.current() == ONE)
+    {
+        tape_3.write(ONE);
+        tape_3.go_right();
+
+        tape_1.write(BLANK);
+        tape_1.go_right();
+
+        steps_counter+=4;
+    }
+
+    if (tape_1.current() != TWO)
+        throw REJECT;
 }
 
 void Three_Tape_Turing_Machine::go_back_all_tapes()

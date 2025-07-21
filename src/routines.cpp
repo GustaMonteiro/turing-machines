@@ -89,6 +89,12 @@ std::vector<std::pair<std::string, bool> > tests = {
     {"00", false},
     {"000", false},
     {"0000", false},
+    {"102", false},
+    {"120", false},
+    {"210", false},
+    {"201", false},
+    {"111000222", false},
+    {"010101222", false},
 };
 
 void execute_all_tests()
