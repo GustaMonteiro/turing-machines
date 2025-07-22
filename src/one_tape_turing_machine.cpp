@@ -3,6 +3,20 @@
 
 #include <iostream>
 
+/*
+1) Write the input on the tape.
+2) If the first element is blank, ACCEPT.
+3) Otherwise, if the current element is 0:
+    4) Mark with X and advance to the right until you find something other than 0 and Y.
+    5) If the element found is different from 1, REJECT.
+    6) Otherwise, mark with Y and advance to the right until you find something other than 1 and Z.
+    7) If the element found is different from 2, REJECT.
+    8) Otherwise, mark with Z and, while the current element is different from X, move to the left.
+    9) Go right and return to step 3.
+10) Otherwise, if the current element is different from Y, REJECT.
+11) Otherwise, advance to the right until you find something other than Y and Z.
+12) If the element found is blank, ACCEPT, otherwise, REJECT.
+*/
 bool One_Tape_Turing_Machine::test_string(const std::string &input)
 {
     try

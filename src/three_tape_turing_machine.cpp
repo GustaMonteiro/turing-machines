@@ -2,6 +2,28 @@
 
 #include "definitions.h"
 
+
+/*
+1) Write the input to tape 1.
+2) If the first element is blank, ACCEPT.
+3) Otherwise, while the current element on tape 1 is 0:
+    4) Write 0 on tape 2 and move to the right.
+    5) Write blank on tape 1 and move to the right.
+6) If the current element is not a 1, REJECT.
+7) Otherwise, while the current element on tape 1 is 1:
+    8) Write 1 on tape 3 and move to the right.
+    9) Write blank on tape 1 and move to the right.
+10) If the current element is not a 2, REJECT.
+11) Move tape 2 to the left.
+12) Move tape 3 to the left.
+13) While not stopping:
+    14) If the current element on tape 1 is 2, on tape 2 is 0, and on tape 3 is 1:
+        15) Write Z on tape 1 and move right.
+        16) Write X on tape 2 and move left.
+        17) Write Y on tape 3 and move left.
+        18) Return to step 14.
+    19) Otherwise, if the current element on tape 1 is blank, on tape 2 is X, and on tape 3 is Y, ACCEPT; otherwise, REJECT.
+*/
 bool Three_Tape_Turing_Machine::test_string(const std::string &input)
 {
     try
